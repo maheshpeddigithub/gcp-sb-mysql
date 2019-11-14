@@ -4,6 +4,8 @@
 
 3. added network config with <laptop_ip>/32 for created mysql instance
 
+4. created database testdb, testuser and specified password for it
+
 4. updated GCP MySQL IP address in application.properties
 
 % mvn spring-boot:run
