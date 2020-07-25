@@ -12,29 +12,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/book")
 public class BookController {
 
     @Autowired
     BookService service;
 
-    @GetMapping("/book")
+    @GetMapping()
     public ResponseEntity<List<Book>> getBooks() {
         return new ResponseEntity<List<Book>>(service.getBooks(), HttpStatus.OK);
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Book> getBook(@PathVariable Integer id) throws ResourceNotFoundExcetion {
         return new ResponseEntity<Book>(service.getBook(id), HttpStatus.OK);
     }
 
-    @PostMapping("/book")
+    @PostMapping("")
     public ResponseEntity<Void> saveBook(@RequestBody Book book) {
         service.saveBook(book);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/book/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<Void> updateBook(@PathVariable Integer id, @RequestBody Book book) throws ResourceNotFoundExcetion {
         Book updatedBook = service.getBook(id);
         updatedBook.setId(book.getId());
@@ -43,7 +43,7 @@ public class BookController {
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/book/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer id) throws ResourceNotFoundExcetion {
         Book deleteBook = service.getBook(id);
         service.deleteBook(deleteBook);
